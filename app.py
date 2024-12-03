@@ -4,7 +4,7 @@ from forecast_model_service import ForecastModelService
 
 app = Flask(__name__)
 
-api_key = "h9ALmIihM35uwJCPVMMbvuTmrs2AeAii"
+api_key = ""
 
 forecast_service = ForecastService(apikey=api_key)
 forecast_model_service = ForecastModelService()
