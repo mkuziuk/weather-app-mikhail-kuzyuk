@@ -6,6 +6,8 @@ app = Flask(__name__)
 
 api_key = ""
 
+# github https://github.com/mkuziuk/weather-app-mikhail-kuzyuk
+
 forecast_service = ForecastService(apikey=api_key)
 forecast_model_service = ForecastModelService()
 
