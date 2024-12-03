@@ -46,11 +46,19 @@
             background-color: #3e8e41;
         }
 
-        #weather-display {
+        /* #weather-display {
             width: 100%;
             height: 100px;
             padding: 10px;
             border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        } */
+
+        #weather-display {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
@@ -66,16 +74,52 @@
         <input type="text" id="destination" name="destination" required>
         <button type="submit">Submit</button>
     </form>
-    <div id="weather-display">
-        <h2>Current Weather:</h2>
-        <p id="current-weather"></p>
-        <h2>Weather Check:</h2>
-        <p id="weather-check"></p>
+
+    <div id="error-message">
+        {% if error %}
+        <p style="color: red">{{ error }}</p>
+        {% endif %}
     </div>
 
-    <script>
-        // This script will be used to update the weather display
-    </script>
+    <!-- <div id="departure-weather-display">
+        <h2>Departure City Weather:</h2>
+        <p id="departure-current-weather">{{ departure_current_weather }}</p>
+        <p id="departure-weather-check">{{ departure_weather_check }}</p>
+    </div> -->
+
+    <div id="weather-display">
+        {% if departure_current_weather %}
+        <h2>Current Weather</h2>
+        <p>Observation Time: {{ departure_current_weather[0]['LocalObservationDateTime'] }}</p>
+        <p>Weather: {{ departure_current_weather[0]['WeatherText'] }}</p>
+        <p>Temperature: {{ departure_current_weather[0]['Temperature']['Metric']['Value'] }}°{{
+            departure_current_weather[0]['Temperature']['Metric']['Unit'] }}</p>
+        <p>Precipitation: {{ departure_current_weather[0]['PrecipitationType'] }}</p>
+        <p>Day Time: {{ 'Yes' if departure_current_weather[0]['IsDayTime'] else 'No' }}</p>
+
+        <p id="departure-weather-check">{{ departure_weather_check }}</p>
+        {% endif %}
+    </div>
+
+    <!-- <div id="destination-weather-display">
+        <h2>Destination City Weather:</h2>
+        <p id="destination-current-weather">{{ destination_current_weather }}</p>
+        <p id="destination-weather-check">{{ destination_weather_check }}</p>
+    </div> -->
+
+    <div id="weather-display">
+        {% if departure_current_weather %}
+        <h2>Current Weather</h2>
+        <p>Observation Time: {{ destination_current_weather[0]['LocalObservationDateTime'] }}</p>
+        <p>Weather: {{ destination_current_weather[0]['WeatherText'] }}</p>
+        <p>Temperature: {{ destination_current_weather[0]['Temperature']['Metric']['Value'] }}°{{
+            destination_current_weather[0]['Temperature']['Metric']['Unit'] }}</p>
+        <p>Precipitation: {{ destination_current_weather[0]['PrecipitationType'] }}</p>
+        <p>Day Time: {{ 'Yes' if destination_current_weather[0]['IsDayTime'] else 'No' }}</p>
+
+        <p id="destination-weather-check">{{ destination_weather_check }}</p>
+        {% endif %}
+    </div>
 </body>
 
 </html>

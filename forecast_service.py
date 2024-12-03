@@ -34,13 +34,21 @@ class ForecastService:
             + "&q="
             + location
         )
+
         try:
             response = requests.get(url)
+            print(f"Request URL: {url}")
+            print(f"Response status code: {response.status_code}")
             response.raise_for_status()
             return response.json()[0]["Key"]
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching location key: {e}")
-            return None
+            message = f"Error fetching location key: {e}"
+            print(message)
+            raise Exception(message)
+        except IndexError as e:
+            message = f"Error fetching location key: {e}"
+            print(message)
+            raise Exception(message)
 
     def get_current_weather(self, location_key):
         """
@@ -61,12 +69,14 @@ class ForecastService:
             + location_key
             + "?apikey="
             + self.apikey
+            + "&details=true"
         )
         try:
             response = requests.get(url)
             response.raise_for_status()
-            print(response.json())
+            # print(response.json())
             return response.json()
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching current weather: {e}")
-            return None
+            message = f"Error fetching current weather: {e}"
+            print(message)
+            raise Exception(message)

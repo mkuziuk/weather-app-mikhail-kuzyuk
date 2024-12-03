@@ -6,23 +6,24 @@ class ForecastModelService:
         скорость ветра выше 50 км/ч,
         вероятность осадков выше 70%
         """
-        if current_weather is None:
+        if not current_weather:
             return "Unable to retrieve current weather"
 
         try:
-            if (
-                current_weather[0]["Temperature"]["Metric"]["Value"] < 0
-                or current_weather[0]["Temperature"]["Metric"]["Value"] > 35
-            ):
+            temperature = current_weather[0]["Temperature"]["Metric"]["Value"]
+            wind_speed = current_weather[0]["Wind"]["Speed"]["Metric"]["Value"]
+            precipitation_probability = current_weather[0]["PrecipitationSummary"][
+                "PastHour"
+            ]["Metric"]["Value"]
+
+            if temperature < 0 or temperature > 35:
                 return "It's cold outside"
-            elif current_weather[0]["Wind"]["Metric"]["Speed"]["Value"] > 50:
+            elif wind_speed > 50:
                 return "It's windy outside"
-            elif (
-                current_weather[0]["PrecipitationSummary"]["Metric"]["Probability"] > 70
-            ):
+            elif precipitation_probability > 70:
                 return "It's rainy outside"
             else:
-                return "It's sunny outside"
+                return "The weather is nice"
 
         except (KeyError, IndexError):
-            return "Invalid weather data"
+            raise Exception("Invalid current weather data")
