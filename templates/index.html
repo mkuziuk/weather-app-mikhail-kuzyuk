@@ -89,7 +89,7 @@
 
     <div id="weather-display">
         {% if departure_current_weather %}
-        <h2>Current Weather</h2>
+        <h2>Departure City Weather: {{ departure_current_weather[0]['CityName'] }}</h2>
         <p>Observation Time: {{ departure_current_weather[0]['LocalObservationDateTime'] }}</p>
         <p>Weather: {{ departure_current_weather[0]['WeatherText'] }}</p>
         <p>Temperature: {{ departure_current_weather[0]['Temperature']['Metric']['Value'] }}°{{
@@ -109,7 +109,7 @@
 
     <div id="weather-display">
         {% if departure_current_weather %}
-        <h2>Current Weather</h2>
+        <h2>Destination City Weather: {{ destination_current_weather[0]['CityName'] }}</h2>
         <p>Observation Time: {{ destination_current_weather[0]['LocalObservationDateTime'] }}</p>
         <p>Weather: {{ destination_current_weather[0]['WeatherText'] }}</p>
         <p>Temperature: {{ destination_current_weather[0]['Temperature']['Metric']['Value'] }}°{{

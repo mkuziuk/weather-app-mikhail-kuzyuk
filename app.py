@@ -4,7 +4,7 @@ from forecast_model_service import ForecastModelService
 
 app = Flask(__name__)
 
-api_key = ""
+api_key = "wKVsmvf5gz7JPfuB56XsI7ltTLAHp8I8"
 
 # github https://github.com/mkuziuk/weather-app-mikhail-kuzyuk
 
